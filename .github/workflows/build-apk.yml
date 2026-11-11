@@ -1,0 +1,53 @@
+name: Build APK Solar Metric
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Sinkronkan web app ke dalam APK
+        run: |
+          cp web/index.html app/src/main/assets/index.html
+          cp web/Template_SolarMetric_BSB.xlsx app/src/main/assets/
+          cp -r web/icons app/src/main/assets/
+
+      - name: Build APK
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease --no-daemon
+
+      - name: Beri nama APK
+        run: cp app/build/outputs/apk/release/app-release.apk SolarMetric-BSB.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SolarMetric-BSB-apk
+          path: SolarMetric-BSB.apk
+
+      - name: Terbitkan rilis
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.3.${{ github.run_number }}
+          name: Solar Metric v1.3.${{ github.run_number }}
+          make_latest: true
+          body: |
+            Solar Metric by BSB Group – kalkulator PLTS dengan import Excel dan analisis BEP.
+            Unduh **SolarMetric-BSB.apk** di bawah, lalu pasang di HP Android (Android 7 ke atas).
+            Saat memasang, izinkan "Instal dari sumber tidak dikenal".
+          files: SolarMetric-BSB.apk
