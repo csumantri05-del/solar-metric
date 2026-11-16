@@ -1,7 +1,7 @@
 # Solar Metric by BSB Group
 
 Kalkulator perencanaan PLTS (panel surya, inverter, baterai) dengan import Excel.
-Satu paket untuk **Android (APK)** dan **iPhone (Web App)**.
+Satu paket untuk **Android (APK)**, **Windows (.exe)** dan **iPhone (Web App)**.
 
 | Folder | Isi |
 |---|---|
@@ -20,6 +20,15 @@ Saat memasang APK di HP, izinkan "Instal dari sumber tidak dikenal".
 Untuk iPhone, gunakan versi web (lihat Cara 2).
 
 Untuk mengubah tampilan/rumus, edit `web/index.html` lalu commit ke `main`.
+
+## Aplikasi Windows
+Setiap build juga membuat aplikasi Windows 10/11 di halaman **Releases**:
+- Installer: `https://github.com/<username>/solar-metric/releases/latest/download/SolarMetric-BSB-Setup.exe`
+- Portable (tanpa instal): `https://github.com/<username>/solar-metric/releases/latest/download/SolarMetric-BSB-Portable.exe`
+
+Jika Windows menampilkan "Windows protected your PC", klik **More info** → **Run anyway**
+(muncul karena aplikasi belum memakai sertifikat code signing berbayar).
+Kode aplikasi desktop ada di folder `desktop/` (Electron) dan memakai `web/index.html` yang sama.
 
 ## CARA 2: Hanya web app, tanpa akun GitHub (Netlify Drop)
 1. Buka https://app.netlify.com/drop

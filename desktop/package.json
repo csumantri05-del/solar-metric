@@ -1,0 +1,40 @@
+{
+  "name": "solar-metric-bsb",
+  "productName": "Solar Metric",
+  "version": "1.4.0",
+  "description": "Solar Metric by BSB Group - kalkulator perencanaan PLTS",
+  "author": "BSB Group",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win --x64 --publish never"
+  },
+  "devDependencies": {
+    "electron": "33.2.1",
+    "electron-builder": "25.1.8"
+  },
+  "build": {
+    "appId": "com.bsbgroup.solarmetric",
+    "productName": "Solar Metric",
+    "copyright": "BSB Group",
+    "directories": { "output": "dist", "buildResources": "build" },
+    "files": ["main.js", "app/**/*"],
+    "win": {
+      "target": ["nsis", "portable"],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Solar Metric",
+      "artifactName": "SolarMetric-BSB-Setup.${ext}"
+    },
+    "portable": {
+      "artifactName": "SolarMetric-BSB-Portable.${ext}"
+    }
+  }
+}

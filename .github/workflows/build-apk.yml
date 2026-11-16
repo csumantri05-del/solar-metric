@@ -1,4 +1,4 @@
-name: Build APK Solar Metric
+name: Build APK & Windows Solar Metric
 
 on:
   push:
@@ -47,7 +47,53 @@ jobs:
           name: Solar Metric v1.4.${{ github.run_number }}
           make_latest: true
           body: |
-            Solar Metric by BSB Group – kalkulator PLTS dengan import Excel dan analisis BEP.
-            Unduh **SolarMetric-BSB.apk** di bawah, lalu pasang di HP Android (Android 7 ke atas).
-            Saat memasang, izinkan "Instal dari sumber tidak dikenal".
+            Solar Metric by BSB Group – kalkulator PLTS dengan import Excel, analisis BEP dan rincian material.
+
+            **Android:** unduh **SolarMetric-BSB.apk**, lalu pasang (izinkan "Instal dari sumber tidak dikenal").
+
+            **Windows 10/11:**
+            - **SolarMetric-BSB-Setup.exe** – installer, membuat ikon di Desktop & Start Menu.
+            - **SolarMetric-BSB-Portable.exe** – langsung jalan tanpa instal (bisa dari flashdisk).
+            Jika muncul "Windows protected your PC", klik **More info** → **Run anyway**.
+
+            File Windows muncul ±5 menit setelah APK.
           files: SolarMetric-BSB.apk
+
+  windows:
+    needs: build
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Salin web app ke aplikasi desktop
+        shell: bash
+        run: |
+          mkdir -p desktop/app
+          cp -r web/index.html web/Template_SolarMetric_BSB.xlsx web/icons desktop/app/
+
+      - name: Build aplikasi Windows
+        working-directory: desktop
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+        run: |
+          npm install --no-audit --no-fund
+          npm run dist
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SolarMetric-BSB-windows
+          path: |
+            desktop/dist/SolarMetric-BSB-Setup.exe
+            desktop/dist/SolarMetric-BSB-Portable.exe
+
+      - name: Tambahkan ke rilis
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.4.${{ github.run_number }}
+          files: |
+            desktop/dist/SolarMetric-BSB-Setup.exe
+            desktop/dist/SolarMetric-BSB-Portable.exe
