@@ -1,5 +1,5 @@
 // Solar Metric by BSB Group - service worker (mode offline)
-const CACHE = 'solarmetric-v1.3';
+const CACHE = 'solarmetric-v1.4';
 const FILES = ['./', './index.html', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './icons/apple-touch-icon.png'];
 

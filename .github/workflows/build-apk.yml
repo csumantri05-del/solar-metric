@@ -43,8 +43,8 @@ jobs:
       - name: Terbitkan rilis
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.3.${{ github.run_number }}
-          name: Solar Metric v1.3.${{ github.run_number }}
+          tag_name: v1.4.${{ github.run_number }}
+          name: Solar Metric v1.4.${{ github.run_number }}
           make_latest: true
           body: |
             Solar Metric by BSB Group – kalkulator PLTS dengan import Excel dan analisis BEP.

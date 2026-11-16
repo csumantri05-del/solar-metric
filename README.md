@@ -40,6 +40,8 @@ Untuk penggunaan internal tim/klien, Web App (Tambahkan ke Layar Utama) sudah cu
 ## Fitur
 - Perhitungan panel, inverter, baterai (rumus Solar Metric V7)
 - Analisis biaya & BEP: tarif PLN per golongan, investasi, hemat per bulan, ROI, grafik arus kas 25 tahun
+- Waktu pakai per perangkat: siang, malam, 24 jam atau jam sendiri; baterai bisa diukur sesuai pemakaian malam
+- Rincian material instalasi (deskripsi, jumlah, satuan, harga) + jasa instalasi, tampil sebagai RAB di laporan
 - Import Excel (.xlsx/.csv) + template Excel (`web/Template_SolarMetric_BSB.xlsx`)
 - Cetak / simpan PDF laporan, bagikan ringkasan
 - Data tersimpan otomatis, berjalan offline
